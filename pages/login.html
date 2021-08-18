@@ -1,0 +1,27 @@
+<html>
+
+<head>
+    <title>
+        Login
+    </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script type="text/javascript" src="scripts/login.js"></script> -->
+
+    <link rel="stylesheet" href="../css/layout.css">
+</head>
+
+<body>
+    <h3>Log in</h3>
+    <form action="/login" method="post">
+        <div id="div_form_login">
+            <input type="text" name="username" id="inp_username" placeholder="Enter username">
+            <input type="text" name="password" id="inp_password" placeholder="Enter password">
+            <input type="submit" value="Log in" class="btn">
+            <a href="/users/create">Not a user? Click here.</a>
+        </div>
+    </form>
+
+</body>
+
+</html>

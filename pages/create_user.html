@@ -1,0 +1,29 @@
+<html>
+
+<head>
+    <title>
+        Create user
+    </title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../scripts/validate_user.js"></script>
+    <link rel="stylesheet" href="../css/layout.css">
+</head>
+
+<body>
+    <h3>Create user</h3>
+    <form name="createUserForm" action="/users/create" method="post" onsubmit="return validateUser()">
+        <div id="div_form_create_user">
+            <input type="text" name="username" id="inp_username" placeholder="Enter username">
+            <input type="email" name="email" id="inp_email" placeholder="Enter email">
+            <input type="password" name="password" id="inp_password" placeholder="Enter password">
+            <input type="password" name="repassword" id="inp_reenter_password" placeholder="Re-enter password">
+            <input type="submit" value="Create" class="btn">
+            <a href="/login">Back to log-in.</a>
+        </div>
+    </form>
+
+</body>
+
+</html>
+
