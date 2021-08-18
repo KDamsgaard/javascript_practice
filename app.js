@@ -15,23 +15,33 @@ app.use('/css', express.static(path.join(__dirname, 'css')));
 
 
 app.get('/', (req, res) => {
-    res.redirect('/login');
+        res.redirect('/login');
+});
+
+app.get('/:username', (req, res) => {
+    var username = req.params.username;
+    res.send(`Hello, ${username}!`);
 });
 
 app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname + '/pages/login.html'));
 });
 
-app.post('/login', (req, res) => {
-    let user = req.body.username;
-    let pw = req.body.password;
-    var success = tools.attemptLogin(user, pw);
-    if (tools.attemptLogin(user, pw) == true) {
-        res.send(`Hello, ${user}!`);
-    } else {
-        console.log("Unknown user. Try again.");
-        res.redirect('/login');
-    }
+app.post('/login', async (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+
+    client.connect(mongoURL, (err, db) => {
+        if (err) throw err;
+        let dbo = db.db('javascript_practice');
+        dbo.collection('users').findOne({_id: username}).then((result) => {
+            if (result.password == password) {
+                res.redirect('/' + username);
+            } else {
+                res.redirect('/login');
+            }
+        });
+    });
 });
 
 app.get('/users/create', (req, res) => {
@@ -46,8 +56,8 @@ app.post('/users/create', (req, res) => {
 
     client.connect(mongoURL, (err, db) => {
         if (err) throw err;
-        var dbo = db.db('javascript_practice');
-        var user = {username: username, email: email, password: password}
+        let dbo = db.db('javascript_practice');
+        let user = {_id: username, email: email, password: password}
 
         dbo.collection('users').insertOne(user, (err, res) => {
             if (err) throw err;

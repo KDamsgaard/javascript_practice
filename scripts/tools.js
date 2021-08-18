@@ -1,5 +1,5 @@
 module.exports = {
-    attemptLogin: (username, password) => {
+    /* attemptLogin: (username, password) => {
         console.log("A login was attempted...");
         let users = [{"username": "admin", "password": "admin"},
                      {"username": "other", "password": "nuggets"}
@@ -17,17 +17,5 @@ module.exports = {
         } else {
             return false;
         }
-    },
-
-    getDB: async(url, err) => {
-        await client.connect()
-    },
-
-
-    fetchUser: (db, username, err) => {
-        if (err) throw err;
-
-
-        db.close()
-    }
+    }, */
 };
